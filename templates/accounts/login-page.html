@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% block content %}
+
+    <div class="container">
+        <h1>Blog App - Login Form</h1>
+
+        <form action="{% url 'accounts:login user' %}" method="post">
+
+            {% csrf_token %}
+            {% bootstrap_form form %}
+
+            <input type="hidden" name="next" value="{{ next }}">
+
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+{% endblock %}

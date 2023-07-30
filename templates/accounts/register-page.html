@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% block content %}
+
+    <div class="container">
+        <h1>Blog App - Register Form</h1>
+
+        <form action="{% url 'accounts:register user' %}" method="post">
+
+            {% csrf_token %}
+            {% bootstrap_form form %}
+
+            <input type="hidden" name="next" value="{{ next }}">
+
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% load static %}
+<header>
+    <nav class="navbar mynav" role="navigation" id="navbar">
+        <div class="container">
+           <a class="navbar-brand mynav" href="{% url 'common:home page' %}">
+               HOME
+           </a>
+            <ul class="nav justify-content-end">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="#"><i>Post</i></a>
+                    <li class="nav-item"><a class="nav-link" href="#"><i>Groups</i></a>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'group:create group' %}"><i>Create Groups</i></a>
+                    <li class="nav-item"><a class="nav-link" href="{% url "accounts:logout user" %}"><i>Log Out: {{ user.username }}</i></a></li>
+
+                {% else %}
+
+                    <li class="nav-item"><a class="nav-link" href="{% url "accounts:login user" %}"><i>Log In</i></a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url "accounts:register user" %}"><i>Register</i></a></li>
+
+                {% endif %}
+
+            </ul>
+        </div>
+    </nav>
+</header>

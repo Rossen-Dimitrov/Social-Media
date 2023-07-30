@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+    <div class="edit-delete edit-photo">
+        <h2>Edit photo</h2>
+
+        <form action="{% url 'photos:edit photo' pk=photo_detail.pk %}">
+            {{ form.as_p }}
+
+
+            <button class="edit-btn" type="submit">Edit Photo</button>
+        </form>
+    </div>
+
+{% endblock %}
