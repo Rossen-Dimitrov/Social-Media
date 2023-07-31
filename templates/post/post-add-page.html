@@ -2,7 +2,7 @@
 {% load bootstrap5 %}
 {% block prepost %}
     <h4>Create a new Post</h4>
-    <form id='postForm' action="{% url 'post:create post' %}" method="post">
+    <form id='postForm' action="{% url 'posts:create post' %}" method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
         <input type="submit" class="btn btn-primary">

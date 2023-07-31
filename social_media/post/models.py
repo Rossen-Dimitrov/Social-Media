@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 import misaka
 
@@ -39,7 +39,7 @@ class PostModel(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('post:single', kwargs={'username': self.user.username, 'pk': self.pk})
+        return reverse_lazy('posts:post details', kwargs={'username': self.user.username, 'pk': self.pk})
 
     class Meta:
         ordering = ['-date_created']

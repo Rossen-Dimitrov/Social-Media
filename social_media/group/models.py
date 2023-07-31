@@ -1,11 +1,9 @@
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.text import slugify
 import misaka
 from django.contrib.auth import get_user_model
-from django import template
-
-register = template.Library()
+from django.utils.translation import gettext_lazy as _
 
 UserModel = get_user_model()
 
@@ -18,7 +16,8 @@ class GroupModel(models.Model):
         unique=True,
         blank=False,
         null=False,
-        )
+        verbose_name=_("Name"),
+    )
     slug = models.SlugField(
         allow_unicode=True,
         unique=True,
@@ -27,13 +26,14 @@ class GroupModel(models.Model):
     description = models.TextField(
         blank=True,
         default='',
+        verbose_name=_("Description"),
     )
     description_html = models.TextField(
         editable=False,
         default='',
         blank=True,
     )
-    members = models.ManyToManyField(UserModel, through='GroupMembersModel')
+    members = models.ManyToManyField(UserModel, through='GroupMembersModel', verbose_name=_("Members"))
 
     def __str__(self):
         return self.name
@@ -44,18 +44,22 @@ class GroupModel(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('groups:single', kwargs={'slug': self.slug})
+        return reverse_lazy('groups:details_group', kwargs={'slug': self.slug})
 
     class Meta:
         ordering = ['name']
+        verbose_name = _("Group")
+        verbose_name_plural = _("Groups")
 
 
 class GroupMembersModel(models.Model):
-    group = models.ForeignKey(GroupModel, related_name='membership', on_delete=models.DO_NOTHING)
-    user = models.ForeignKey(UserModel, related_name='user_group', on_delete=models.DO_NOTHING)
+    group = models.ForeignKey(GroupModel, related_name='membership', on_delete=models.PROTECT)
+    user = models.ForeignKey(UserModel, related_name='group_member', on_delete=models.PROTECT)
 
     class Meta:
         unique_together = ('group', 'user')
+        verbose_name = _("Group Member")
+        verbose_name_plural = _("Group Members")
 
     def __str__(self):
         return self.user.username

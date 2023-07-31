@@ -13,6 +13,7 @@ UserModel = get_user_model()
 class PostCreateView(LoginRequiredMixin, SelectRelatedMixin, views.CreateView):
     fields = ('message', 'group')
     model = models.PostModel
+    template_name = 'post/post-add-page.html'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -26,7 +27,7 @@ class PostListView(SelectRelatedMixin, views.ListView):
     select_related = ('user', 'group')
 
 
-class UserPostsView(views.ListView):
+class UserPostsListView(views.ListView):
     model = models.PostModel
     template_name = 'post/post-list-page.html'
 

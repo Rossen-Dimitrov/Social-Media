@@ -6,6 +6,6 @@ urlpatterns = [
     path("", include("social_media.common.urls", namespace='common')),
     path("accounts/", include("social_media.accounts.urls", namespace='accounts')),
     # path("accounts/", include("django.contrib.auth.urls")),
-    path("group/", include("social_media.group.urls", namespace='group')),
-    path("post/", include("social_media.post.urls", namespace='post')),
+    path("group/", include("social_media.group.urls", namespace='groups')),
+    path("post/", include("social_media.post.urls", namespace='posts')),
 ]

@@ -16,6 +16,7 @@ class GroupCreateView(LoginRequiredMixin, views.CreateView):
 class GroupDetailsView(LoginRequiredMixin, views.DetailView):
     model = GroupModel
     template_name = 'group/group-details-page.html'
+    context_object_name = 'group'
 
 
 class GroupListView(LoginRequiredMixin, views.ListView):
