@@ -1,5 +1,4 @@
 from django import forms
-
 from social_media.post import models
 
 

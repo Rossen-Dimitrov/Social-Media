@@ -8,7 +8,7 @@
                         <ul class="list-unstyled">
                             {% for member_group in get_user_groups %}
                                 <li class="group li-with-bullet">
-                                    <a href="{% url 'group:details group' slug=member_group.group.slug %}"></a>
+                                    <a href="{% url 'group:details-group' slug=member_group.group.slug %}"></a>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -20,7 +20,7 @@
             <ul class="list-unstyled">
                 {% for otger_groups in get_other_groups %}
                     <li class="group li-with-bullet">
-                        <a href="{% url 'group:details group' slug=otger_groups.slug %}"></a>
+                        <a href="{% url 'group:details-group' slug=otger_groups.slug %}"></a>
                     </li>
                 {% endfor %}
             </ul>

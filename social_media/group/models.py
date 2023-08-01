@@ -1,5 +1,5 @@
 from django.db import models
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from django.utils.text import slugify
 import misaka
 from django.contrib.auth import get_user_model
@@ -39,12 +39,14 @@ class GroupModel(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        self.description_html = misaka.html(self.description)
         super().save(*args, **kwargs)
+        self.slug = slugify(f"{self.name}-{self.id}")
+        self.description_html = misaka.html(self.description)
+
+        return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse_lazy('groups:details_group', kwargs={'slug': self.slug})
+        return reverse('groups:details-group', kwargs={'slug': self.slug})
 
     class Meta:
         ordering = ['name']
@@ -53,8 +55,8 @@ class GroupModel(models.Model):
 
 
 class GroupMembersModel(models.Model):
-    group = models.ForeignKey(GroupModel, related_name='membership', on_delete=models.PROTECT)
-    user = models.ForeignKey(UserModel, related_name='group_member', on_delete=models.PROTECT)
+    group = models.ForeignKey(GroupModel, related_name='membership', on_delete=models.CASCADE)
+    user = models.ForeignKey(UserModel, related_name='group_member', on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ('group', 'user')

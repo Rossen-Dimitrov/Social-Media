@@ -39,7 +39,7 @@ class PostModel(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse_lazy('posts:post details', kwargs={'username': self.user.username, 'pk': self.pk})
+        return reverse_lazy('posts:post-details', kwargs={'username': self.user.username, 'pk': self.pk})
 
     class Meta:
         ordering = ['-date_created']

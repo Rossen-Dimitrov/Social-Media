@@ -1,15 +1,15 @@
 {% extends 'group/group-base-page.html' %}
 {% block pregroup %}
-    <h1>{{ object.name }}</h1>
-    <h2>Member Count: {{ groupmodel.members.count }}</h2>
+    <h1>{{ group.name }}</h1>
+    <h2>Member Count: {{ group.members.count }}</h2>
 
     <div class="content">
-        {% if user in groupmodel.members.all %}
-            <a href="{% url 'groups:leave group' slug=groupmodel.slug %}" class="btn btn-warning">
+        {% if user in group.members.all %}
+            <a href="{% url 'groups:leave-group' slug=group.slug %}" class="btn btn-warning">
                 <span class="glyphicon glyphicon-log-in">Leave</span>
             </a>
         {% else %}
-            <a href="{% url 'groups:join group' slug=groupmodel.slug %}" class="btn btn-warning">
+            <a href="{% url 'groups:join-group' slug=group.slug %}" class="btn btn-warning">
                 <span class="glyphicon glyphicon-log-out">Join</span>
             </a>
         {% endif %}
@@ -18,12 +18,13 @@
 {% endblock %}
 
 {% block group_content %}
-    <div class="col-md-8"></div>
-        {% if groupmodel.posts.count == 0 %}
+    <div class="col-md-8">
+        {% if group.posts.count == 0 %}
             <h2>No posts in this group yet</h2>
         {% else %}
-            {% for post in groupmodel.posts.all %}
+            {% for post in group.posts.all %}
                 {% include "posts/_post.html" %}
             {% endfor %}
         {% endif %}
+    </div>
 {% endblock %}

@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.http import Http404
 from django.urls import reverse_lazy
 from django.views import generic as views
-from social_media.post import models
+from social_media.post import models, forms
 from braces.views import SelectRelatedMixin
 
 UserModel = get_user_model()
@@ -66,10 +66,9 @@ class PostEditView(LoginRequiredMixin, views.UpdateView):
 
 
 class PostDeleteView(LoginRequiredMixin, SelectRelatedMixin, views.DeleteView):
-
     model = models.PostModel
     select_related = ('user', 'group')
-    success_url = reverse_lazy('post:show all user post')
+    success_url = reverse_lazy('posts:list-post')
 
     def get_queryset(self):
         queryset = super().get_queryset()

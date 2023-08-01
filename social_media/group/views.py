@@ -26,7 +26,7 @@ class GroupListView(LoginRequiredMixin, views.ListView):
 
 class GroupJoinGroupView(LoginRequiredMixin, views.RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        return reverse_lazy('group:group-details', kwargs={'slug': self.kwargs.get('slug')})
+        return reverse_lazy('groups:details-group', kwargs={'slug': self.kwargs.get('slug')})
 
     def get(self, request, *args, **kwargs):
         group = get_object_or_404(GroupModel, slug=self.kwargs.get('slug'))
@@ -43,7 +43,7 @@ class GroupJoinGroupView(LoginRequiredMixin, views.RedirectView):
 
 class GroupLeaveGroupView(LoginRequiredMixin, views.RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        return reverse_lazy('group:group-details', kwargs={'slug': self.kwargs.get('slug')})
+        return reverse_lazy('groups:details-group', kwargs={'slug': self.kwargs.get('slug')})
 
     def get(self, request, *args, **kwargs):
         try:

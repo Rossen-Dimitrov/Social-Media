@@ -13,7 +13,7 @@ class ProfileRegisterView(views.CreateView):
     model = UserModel
     form_class = forms.AppUserRegisterForm
     template_name = 'accounts/register-page.html'
-    success_url = reverse_lazy('common:home page')
+    success_url = reverse_lazy('common:home-page')
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
@@ -48,7 +48,7 @@ class ProfileEditView(LoginRequiredMixin, views.UpdateView):
     template_name = 'accounts/profile-edit-page.html'
 
     def get_success_url(self):
-        return reverse_lazy('accounts:show profile details',
+        return reverse_lazy('accounts:show-profile-details',
                             kwargs={'pk': self.object.pk})
 
 

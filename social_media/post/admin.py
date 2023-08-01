@@ -1,3 +1,7 @@
 from django.contrib import admin
+from social_media.post.models import PostModel
 
-# Register your models here.
+
+@admin.register(PostModel)
+class PostModelAdmin(admin.ModelAdmin):
+    list_display = ('user', 'message', 'group')
