@@ -57,6 +57,7 @@ class GroupModel(models.Model):
 class GroupMembersModel(models.Model):
     group = models.ForeignKey(GroupModel, related_name='membership', on_delete=models.CASCADE)
     user = models.ForeignKey(UserModel, related_name='group_member', on_delete=models.CASCADE)
+    joined_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         unique_together = ('group', 'user')

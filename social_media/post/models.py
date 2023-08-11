@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 
 import misaka
 
@@ -9,11 +9,11 @@ from social_media.group.models import GroupModel
 UserModel = get_user_model()
 
 
-class PostModel(models.Model):
+class Post(models.Model):
     user = models.ForeignKey(
         UserModel,
         related_name='posts',
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         null=True
         )
     date_created = models.DateTimeField(
@@ -28,7 +28,7 @@ class PostModel(models.Model):
         related_name='posts',
         null=True,
         blank=True,
-        on_delete=models.SET_NULL
+        on_delete=models.CASCADE
         )
 
     def __str__(self):
@@ -39,7 +39,7 @@ class PostModel(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse_lazy('posts:post-details', kwargs={'username': self.user.username, 'pk': self.pk})
+        return reverse_lazy('groups:posts:post-details', kwargs={'username': self.user.username, 'pk': self.pk})
 
     class Meta:
         ordering = ['-date_created']

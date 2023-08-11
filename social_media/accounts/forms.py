@@ -7,7 +7,7 @@ UserModel = get_user_model()
 
 class AppUserRegisterForm(auth_forms.UserCreationForm):
     class Meta(auth_forms.UserCreationForm.Meta):
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2', 'profile_img')
         model = UserModel
 
     # labels = {

@@ -7,8 +7,6 @@
            </a>
             <ul class="nav justify-content-end">
                 {% if request.user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'posts:create-post' %}">
-                        <i>Create Post</i></a>
                     <li class="nav-item"><a class="nav-link" href="{% url 'groups:list-group' %}">
                         <i>All Groups</i></a>
                     <li class="nav-item"><a class="nav-link" href="{% url 'groups:create-group' %}">

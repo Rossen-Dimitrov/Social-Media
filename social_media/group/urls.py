@@ -7,6 +7,7 @@ app_name = 'groups'
 urlpatterns = [
     path('', views.GroupListView.as_view(), name='list-group'),
     path('create/', views.GroupCreateView.as_view(), name='create-group'),
+    path("post/", include("social_media.post.urls", namespace='posts')),
     path('<slug:slug>/', include([
         path('', views.GroupDetailsView.as_view(), name='details-group'),
         path('join/', views.GroupJoinGroupView.as_view(), name='join-group'),

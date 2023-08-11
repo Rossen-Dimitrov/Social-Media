@@ -1,8 +1,7 @@
 from django.contrib.auth import models as auth_models
-
 from django.db import models
 from django.core import validators
-from social_media.validators import validate_letters_only
+from validators import validate_letters_only
 
 
 class AppUser(auth_models.AbstractUser, auth_models.PermissionsMixin):
@@ -46,3 +45,19 @@ class AppUser(auth_models.AbstractUser, auth_models.PermissionsMixin):
         null=False,
         blank=False,
     )
+
+    profile_img = models.ImageField(
+        default='profileimages/person.png',
+        upload_to='profileimages/',
+        null=True,
+        blank=True,
+    )
+    last_login = models.DateTimeField(
+        auto_now=True
+    )
+    created_on = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} {self.email}"

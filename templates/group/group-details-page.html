@@ -8,6 +8,8 @@
             <a href="{% url 'groups:leave-group' slug=group.slug %}" class="btn btn-warning">
                 <span class="glyphicon glyphicon-log-in">Leave</span>
             </a>
+            <li><a class="btn btn-warning" href="{% url 'groups:posts:create-post' slug=group.slug user.pk%}">
+            <i>Create Post</i></a>
         {% else %}
             <a href="{% url 'groups:join-group' slug=group.slug %}" class="btn btn-warning">
                 <span class="glyphicon glyphicon-log-out">Join</span>
@@ -23,7 +25,7 @@
             <h2>No posts in this group yet</h2>
         {% else %}
             {% for post in group.posts.all %}
-                {% include "posts/_post.html" %}
+                {% include "post/_post.html" %}
             {% endfor %}
         {% endif %}
     </div>
